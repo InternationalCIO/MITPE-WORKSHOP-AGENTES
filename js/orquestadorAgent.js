@@ -1,54 +1,58 @@
 /**
- * OrquestadorAgent - Fase III
- * Agente orquestador que maneja smalltalk y delega operaciones matemáticas
- * al MatematicasAgente
+ * OrquestadorAgent - Fase IV
+ * Agente orquestador que maneja smalltalk, delega operaciones matematicas
+ * al MatematicasAgente, y preguntas complejas al ModeloAgente (servidor)
  */
 
 const OrquestadorAgent = {
     nombre: "OrquestadorAgent",
-    version: "Fase III",
-    idioma: "Español",
+    version: "Fase IV",
+    idioma: "Espanol",
+
+    // URL del servidor (Railway en produccion, localhost en desarrollo)
+    // IMPORTANTE: Actualizar con la URL de Railway despues del despliegue
+    serverURL: "https://mitpe-workshop-agentes-server-production.up.railway.app",
 
     // Patrones de reconocimiento
     patrones: {
         saludos: [
             /^hola$/i,
             /^hola[!.,\s]/i,
-            /^buenos\s*d[ií]as/i,
+            /^buenos\s*d[ii]as/i,
             /^buenas\s*tardes/i,
             /^buenas\s*noches/i,
             /^hey$/i,
             /^saludos/i,
-            /^buen\s*d[ií]a/i
+            /^buen\s*d[ii]a/i
         ],
         estadoBienestar: [
-            /^[¿?]*\s*c[oó]mo\s*est[aá]s\s*[¿?]*$/i,
-            /^[¿?]*\s*qu[eé]\s*tal\s*[¿?]*$/i,
-            /^[¿?]*\s*qu[eé]\s*tal\s*est[aá]s\s*[¿?]*$/i,
-            /^[¿?]*\s*qu[eé]\s*tal\s*tu\s*d[ií]a\s*[¿?]*$/i,
-            /^[¿?]*\s*qu[eé]\s*tal\s*todo\s*[¿?]*$/i,
-            /^[¿?]*\s*c[oó]mo\s*va\s*[¿?]*$/i,
-            /^[¿?]*\s*c[oó]mo\s*te\s*va\s*[¿?]*$/i,
-            /^[¿?]*\s*c[oó]mo\s*andas\s*[¿?]*$/i,
-            /^[¿?]*\s*c[oó]mo\s*vas\s*[¿?]*$/i,
+            /^[¿?]*\s*c[oo]mo\s*est[aa]s\s*[¿?]*$/i,
+            /^[¿?]*\s*qu[ee]\s*tal\s*[¿?]*$/i,
+            /^[¿?]*\s*qu[ee]\s*tal\s*est[aa]s\s*[¿?]*$/i,
+            /^[¿?]*\s*qu[ee]\s*tal\s*tu\s*d[ii]a\s*[¿?]*$/i,
+            /^[¿?]*\s*qu[ee]\s*tal\s*todo\s*[¿?]*$/i,
+            /^[¿?]*\s*c[oo]mo\s*va\s*[¿?]*$/i,
+            /^[¿?]*\s*c[oo]mo\s*te\s*va\s*[¿?]*$/i,
+            /^[¿?]*\s*c[oo]mo\s*andas\s*[¿?]*$/i,
+            /^[¿?]*\s*c[oo]mo\s*vas\s*[¿?]*$/i,
             /^[¿?]*\s*todo\s*bien\s*[¿?]*$/i,
-            /^[¿?]*\s*qu[eé]\s*hay\s*[¿?]*$/i,
-            /^[¿?]*\s*qu[eé]\s*onda\s*[¿?]*$/i,
-            /^[¿?]*\s*c[oó]mo\s*lo\s*llevas\s*[¿?]*$/i
+            /^[¿?]*\s*qu[ee]\s*hay\s*[¿?]*$/i,
+            /^[¿?]*\s*qu[ee]\s*onda\s*[¿?]*$/i,
+            /^[¿?]*\s*c[oo]mo\s*lo\s*llevas\s*[¿?]*$/i
         ],
         despedidas: [
-            /^adi[oó]s/i,
+            /^adi[oo]s/i,
             /^hasta\s*luego/i,
             /^hasta\s*pronto/i,
-            /^hasta\s*ma[nñ]ana/i,
+            /^hasta\s*ma[nn]ana/i,
             /^chao/i,
             /^chau/i,
             /^nos\s*vemos/i,
             /^bye/i,
-            /^cu[ií]date/i,
+            /^cu[ii]date/i,
             /^buenas\s*noches.*descansar/i,
             /^me\s*voy/i,
-            /^hasta\s*la\s*pr[oó]xima/i
+            /^hasta\s*la\s*pr[oo]xima/i
         ],
         agradecimientos: [
             /gracias/i,
@@ -61,8 +65,8 @@ const OrquestadorAgent = {
             /genial/i,
             /excelente/i,
             /perfecto/i,
-            /incre[ií]ble/i,
-            /fant[aá]stico/i,
+            /incre[ii]ble/i,
+            /fant[aa]stico/i,
             /buen\s*trabajo/i,
             /bien\s*hecho/i
         ]
@@ -71,60 +75,67 @@ const OrquestadorAgent = {
     // Respuestas variadas
     respuestas: {
         saludos: [
-            "¡Hola! ¿En qué puedo ayudarte hoy?",
-            "¡Buenos días! Es un placer saludarte.",
-            "¡Hola! Bienvenido al programa de IA Agéntica del MIT.",
-            "¡Saludos! ¿Cómo puedo asistirte?"
+            "Hola! En que puedo ayudarte hoy?",
+            "Buenos dias! Es un placer saludarte.",
+            "Hola! Bienvenido al programa de IA Agentica del MIT.",
+            "Saludos! Como puedo asistirte?"
         ],
         estadoBienestar: [
-            "¡Muy bien, gracias por preguntar! Aquí, listo para ayudarte. ¿Y tú qué tal?",
-            "¡Excelente! Funcionando al 100%. ¿En qué puedo ayudarte?",
-            "¡Todo genial! Como buen agente de IA, siempre de buen humor. ¿Cómo estás tú?",
-            "¡Perfectamente! Preparado para asistirte en lo que necesites.",
-            "¡De maravilla! Gracias por interesarte. ¿Cómo va tu día?"
+            "Muy bien, gracias por preguntar! Aqui, listo para ayudarte. Y tu que tal?",
+            "Excelente! Funcionando al 100%. En que puedo ayudarte?",
+            "Todo genial! Como buen agente de IA, siempre de buen humor. Como estas tu?",
+            "Perfectamente! Preparado para asistirte en lo que necesites.",
+            "De maravilla! Gracias por interesarte. Como va tu dia?"
         ],
         despedidas: [
-            "¡Hasta pronto! Fue un placer ayudarte.",
-            "¡Adiós! Que tengas un excelente día.",
-            "¡Nos vemos! Recuerda aprovechar el programa al 100%.",
-            "¡Hasta luego! Aquí estaré cuando me necesites."
+            "Hasta pronto! Fue un placer ayudarte.",
+            "Adios! Que tengas un excelente dia.",
+            "Nos vemos! Recuerda aprovechar el programa al 100%.",
+            "Hasta luego! Aqui estare cuando me necesites."
         ],
         agradecimientos: [
-            "¡De nada! Es un placer poder ayudar.",
-            "¡No hay de qué! Para eso estamos.",
-            "¡Me alegra haber sido de ayuda!",
-            "¡Gracias a ti por participar en este programa!"
+            "De nada! Es un placer poder ayudar.",
+            "No hay de que! Para eso estamos.",
+            "Me alegra haber sido de ayuda!",
+            "Gracias a ti por participar en este programa!"
         ],
         basura: [
-            "He detectado un mensaje que no tiene sentido. ¿Podrías reformular tu pregunta?",
-            "Parece que el mensaje contiene texto sin sentido. ¿Puedes escribirlo de otra forma?",
-            "No he podido entender ese mensaje. ¿Podrías intentarlo de nuevo?"
+            "He detectado un mensaje que no tiene sentido. Podrias reformular tu pregunta?",
+            "Parece que el mensaje contiene texto sin sentido. Puedes escribirlo de otra forma?",
+            "No he podido entender ese mensaje. Podrias intentarlo de nuevo?"
         ],
-        noImplementado: [
-            "En esta fase manejo smalltalk y operaciones matemáticas (/suma, /resta, /multiplicacion, /division). ¡Espera a las siguientes fases para más funcionalidades!",
-            "Esa pregunta aún no puedo responderla. Prueba con los comandos matemáticos o espera a futuras fases. ¡Paciencia!",
-            "Interesante pregunta, pero aún no tengo esa capacidad. Prueba: /suma 5 3"
+        cargando: [
+            "Consultando con el modelo de IA...",
+            "Procesando tu pregunta...",
+            "Un momento, estoy buscando la informacion..."
+        ],
+        errorServidor: [
+            "Lo siento, no pude conectar con el servidor. Intenta de nuevo en unos segundos.",
+            "El servidor no esta disponible en este momento. Por favor, intenta mas tarde.",
+            "Hubo un problema de conexion. Puedes intentarlo de nuevo?"
         ]
     },
 
     // Mensaje de bienvenida
     getMensajeBienvenida: function() {
-        return `¡Hola! Soy <strong>${this.nombre}</strong>, tu asistente virtual.
+        return `Hola! Soy <strong>${this.nombre}</strong>, tu asistente virtual.
 
-<strong>Versión:</strong> ${this.version}
+<strong>Version:</strong> ${this.version}
 <strong>Idioma:</strong> ${this.idioma}
 
-<strong>¿Qué puedo hacer?</strong>
+<strong>Que puedo hacer?</strong>
 En esta fase puedo:
-• Responder a saludos y despedidas
-• Contestar a preguntas como "¿Cómo estás?" o "¿Qué tal?"
-• Aceptar agradecimientos y reconocimientos
-• Detectar mensajes sin sentido
-• <strong>Operaciones matemáticas</strong> (delegadas a MatematicasAgente):
+- Responder a saludos y despedidas
+- Contestar preguntas como "Como estas?" o "Que tal?"
+- Aceptar agradecimientos
+- <strong>Operaciones matematicas</strong> (MatematicasAgente):
   <code>/suma 5 3</code>
   <code>/resta 10 4</code>
   <code>/multiplicacion 6 7</code>
   <code>/division 20 4</code>
+- <strong>Preguntas sobre participantes</strong> (ModeloAgente + IA):
+  Preguntame sobre los participantes del programa!
+  Ejemplo: "Quien es de Mexico?" o "Cuentame sobre Fabian"
 
 Escribe algo para comenzar...`;
     },
@@ -133,74 +144,127 @@ Escribe algo para comenzar...`;
     esBasura: function(texto) {
         const textoLimpio = texto.trim();
 
-        // Muy corto (menos de 2 caracteres)
         if (textoLimpio.length < 2) return true;
 
-        // Solo consonantes repetidas o patrones sin sentido
         const soloConsonantes = /^[bcdfghjklmnpqrstvwxyz]+$/i;
         if (soloConsonantes.test(textoLimpio) && textoLimpio.length > 3) return true;
 
-        // Caracteres repetidos excesivamente
         const repetidos = /(.)\1{4,}/;
         if (repetidos.test(textoLimpio)) return true;
 
-        // Mezcla aleatoria sin vocales (más de 5 caracteres)
-        const sinVocales = textoLimpio.replace(/[aeiouáéíóú\s]/gi, '');
+        const sinVocales = textoLimpio.replace(/[aeiouaeiou\s]/gi, '');
         if (sinVocales.length > 5 && sinVocales.length / textoLimpio.length > 0.8) return true;
 
-        // Patrones típicos de teclado aleatorio
         const patronesBasura = /^[asdfghjkl]+$|^[qwertyuiop]+$|^[zxcvbnm]+$/i;
         if (patronesBasura.test(textoLimpio) && textoLimpio.length > 4) return true;
 
         return false;
     },
 
-    // Obtener respuesta aleatoria de un array
     getRespuestaAleatoria: function(array) {
         return array[Math.floor(Math.random() * array.length)];
     },
 
-    // Verificar si coincide con algún patrón
     coincideConPatron: function(texto, patrones) {
         return patrones.some(patron => patron.test(texto.trim()));
     },
 
-    // Procesar mensaje del usuario
+    // Verificar si es smalltalk (saludos, despedidas, etc.)
+    esSmalltalk: function(texto) {
+        const textoLimpio = texto.trim();
+
+        if (this.coincideConPatron(textoLimpio, this.patrones.estadoBienestar)) return true;
+        if (this.coincideConPatron(textoLimpio, this.patrones.saludos)) return true;
+        if (this.coincideConPatron(textoLimpio, this.patrones.despedidas)) return true;
+        if (this.coincideConPatron(textoLimpio, this.patrones.agradecimientos)) return true;
+
+        return false;
+    },
+
+    // Procesar mensaje (sincrono para smalltalk y matematicas)
     procesarMensaje: function(mensaje) {
         const textoLimpio = mensaje.trim();
 
-        // Verificar si es un comando matemático (delegar a MatematicasAgente)
+        // Comando matematico -> MatematicasAgente
         if (typeof MatematicasAgente !== 'undefined' && MatematicasAgente.esComandoMatematico(textoLimpio)) {
             return MatematicasAgente.ejecutar(textoLimpio);
         }
 
-        // Verificar si es basura (pero no si empieza con /)
+        // Basura
         if (!textoLimpio.startsWith('/') && this.esBasura(textoLimpio)) {
             return this.getRespuestaAleatoria(this.respuestas.basura);
         }
 
-        // Verificar preguntas sobre estado/bienestar
+        // Estado/bienestar
         if (this.coincideConPatron(textoLimpio, this.patrones.estadoBienestar)) {
             return this.getRespuestaAleatoria(this.respuestas.estadoBienestar);
         }
 
-        // Verificar saludos
+        // Saludos
         if (this.coincideConPatron(textoLimpio, this.patrones.saludos)) {
             return this.getRespuestaAleatoria(this.respuestas.saludos);
         }
 
-        // Verificar despedidas
+        // Despedidas
         if (this.coincideConPatron(textoLimpio, this.patrones.despedidas)) {
             return this.getRespuestaAleatoria(this.respuestas.despedidas);
         }
 
-        // Verificar agradecimientos
+        // Agradecimientos
         if (this.coincideConPatron(textoLimpio, this.patrones.agradecimientos)) {
             return this.getRespuestaAleatoria(this.respuestas.agradecimientos);
         }
 
-        // No implementado
-        return this.getRespuestaAleatoria(this.respuestas.noImplementado);
+        // Si no es smalltalk ni matematicas, retornar null para indicar que necesita consulta al servidor
+        return null;
+    },
+
+    // Consultar al servidor (ModeloAgente) - Asincrono
+    consultarServidor: async function(pregunta) {
+        try {
+            const response = await fetch(`${this.serverURL}/api/pregunta`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ pregunta: pregunta })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error del servidor: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (data.exito) {
+                let respuestaHTML = `<strong>ModeloAgente:</strong> ${data.respuesta}
+
+<span style="font-size: 0.8rem; color: #888;">Respondido por ${data.agente} usando ${data.modelo}</span>`;
+
+                // Agregar informacion de coste si esta disponible
+                if (data.uso) {
+                    let cacheInfo = '';
+                    if (data.uso.cache && data.uso.cache.activo) {
+                        cacheInfo = ` | Cache: Si`;
+                        if (data.uso.ahorro) {
+                            cacheInfo += ` (ahorro: ${data.uso.ahorro})`;
+                        }
+                    }
+                    respuestaHTML += `
+<span style="font-size: 0.75rem; color: #aaa; display: block; margin-top: 0.5rem;">
+Tokens: ${data.uso.tokensTotal} | Coste: ${data.uso.costeEstimado}${cacheInfo}
+</span>`;
+                }
+
+                return respuestaHTML;
+            } else {
+                return data.respuesta || this.getRespuestaAleatoria(this.respuestas.errorServidor);
+            }
+
+        } catch (error) {
+            console.error('[OrquestadorAgent] Error consultando servidor:', error);
+            return this.getRespuestaAleatoria(this.respuestas.errorServidor);
+        }
     }
 };
 
@@ -209,7 +273,6 @@ Escribe algo para comenzar...`;
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Crear elementos del chat
     const chatHTML = `
         <div id="chat-button" class="chat-button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
@@ -223,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="chat-avatar">🤖</div>
                     <div>
                         <div class="chat-title">OrquestadorAgent</div>
-                        <div class="chat-subtitle">Fase III - Multiagente</div>
+                        <div class="chat-subtitle">Fase IV - Multiagente + IA</div>
                     </div>
                 </div>
                 <button id="chat-close" class="chat-close">&times;</button>
@@ -240,12 +303,10 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     `;
 
-    // Insertar chat en el body
     const chatWrapper = document.createElement('div');
     chatWrapper.innerHTML = chatHTML;
     document.body.appendChild(chatWrapper);
 
-    // Referencias a elementos
     const chatButton = document.getElementById('chat-button');
     const chatContainer = document.getElementById('chat-container');
     const chatClose = document.getElementById('chat-close');
@@ -253,20 +314,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const chatInput = document.getElementById('chat-input');
     const chatSend = document.getElementById('chat-send');
 
-    // Estado del chat
     let chatAbierto = false;
     let primerApertura = true;
+    let procesando = false;
 
-    // Función para agregar mensaje
-    function agregarMensaje(texto, esUsuario = false) {
+    function agregarMensaje(texto, esUsuario = false, esCargando = false) {
         const mensaje = document.createElement('div');
         mensaje.className = `chat-message ${esUsuario ? 'chat-message-user' : 'chat-message-agent'}`;
-        mensaje.innerHTML = texto;
+        if (esCargando) {
+            mensaje.id = 'mensaje-cargando';
+            mensaje.innerHTML = `<span class="loading-dots">${texto}</span>`;
+        } else {
+            mensaje.innerHTML = texto;
+        }
         chatMessages.appendChild(mensaje);
         chatMessages.scrollTop = chatMessages.scrollHeight;
+        return mensaje;
     }
 
-    // Abrir/cerrar chat
+    function eliminarMensajeCargando() {
+        const cargando = document.getElementById('mensaje-cargando');
+        if (cargando) {
+            cargando.remove();
+        }
+    }
+
     function toggleChat() {
         chatAbierto = !chatAbierto;
         chatContainer.classList.toggle('chat-hidden', !chatAbierto);
@@ -282,22 +354,47 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Enviar mensaje
-    function enviarMensaje() {
+    async function enviarMensaje() {
+        if (procesando) return;
+
         const texto = chatInput.value.trim();
         if (texto === '') return;
 
         agregarMensaje(texto, true);
         chatInput.value = '';
 
-        // Simular pequeña demora para parecer más natural
-        setTimeout(() => {
-            const respuesta = OrquestadorAgent.procesarMensaje(texto);
-            agregarMensaje(respuesta);
-        }, 300);
+        // Intentar procesar localmente primero
+        const respuestaLocal = OrquestadorAgent.procesarMensaje(texto);
+
+        if (respuestaLocal !== null) {
+            // Respuesta local (smalltalk o matematicas)
+            setTimeout(() => {
+                agregarMensaje(respuestaLocal);
+            }, 300);
+        } else {
+            // Necesita consulta al servidor
+            procesando = true;
+            chatInput.disabled = true;
+            chatSend.disabled = true;
+
+            agregarMensaje(OrquestadorAgent.getRespuestaAleatoria(OrquestadorAgent.respuestas.cargando), false, true);
+
+            try {
+                const respuestaServidor = await OrquestadorAgent.consultarServidor(texto);
+                eliminarMensajeCargando();
+                agregarMensaje(respuestaServidor);
+            } catch (error) {
+                eliminarMensajeCargando();
+                agregarMensaje(OrquestadorAgent.getRespuestaAleatoria(OrquestadorAgent.respuestas.errorServidor));
+            } finally {
+                procesando = false;
+                chatInput.disabled = false;
+                chatSend.disabled = false;
+                chatInput.focus();
+            }
+        }
     }
 
-    // Event listeners
     chatButton.addEventListener('click', toggleChat);
     chatClose.addEventListener('click', toggleChat);
     chatSend.addEventListener('click', enviarMensaje);

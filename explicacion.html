@@ -416,6 +416,103 @@
             </div>
         </div>
 
+        <!-- FASE IV -->
+        <section style="margin-top: 4rem;">
+            <h2>Fase IV: Integracion con IA Real</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; color: #666;">
+                El gran salto: ahora el sistema puede <strong>responder preguntas complejas</strong>
+                usando un modelo de Inteligencia Artificial real (Anthropic Haiku).
+            </p>
+        </section>
+
+        <div class="analogy-box">
+            <h3>Imaginalo asi...</h3>
+            <p>
+                Ahora nuestra empresa tiene cuatro empleados: el <strong>recepcionista</strong> (OrquestadorAgent),
+                el <strong>contable</strong> (MatematicasAgente), un <strong>bibliotecario</strong> (CorpusAgente)
+                que conoce toda la informacion, y un <strong>experto consultor</strong> (ModeloAgente)
+                que puede responder preguntas complejas usando IA.
+            </p>
+            <p style="margin-top: 1rem;">
+                Cuando preguntas algo que el recepcionista no sabe responder directamente,
+                llama al experto, quien consulta al bibliotecario y te da una respuesta inteligente.
+            </p>
+        </div>
+
+        <div class="icon-grid" style="margin-top: 2rem;">
+            <div class="icon-card">
+                <div class="icon">🧠</div>
+                <h4>ModeloAgente</h4>
+                <p style="font-size: 0.9rem; color: #666;">
+                    Conecta con Anthropic Haiku para responder preguntas complejas.
+                </p>
+            </div>
+
+            <div class="icon-card">
+                <div class="icon">📚</div>
+                <h4>CorpusAgente</h4>
+                <p style="font-size: 0.9rem; color: #666;">
+                    Gestiona la informacion de participantes y del workshop.
+                </p>
+            </div>
+
+            <div class="icon-card">
+                <div class="icon">🌐</div>
+                <h4>Servidor Railway</h4>
+                <p style="font-size: 0.9rem; color: #666;">
+                    Los agentes de IA corren en la nube, no en tu navegador.
+                </p>
+            </div>
+
+            <div class="icon-card">
+                <div class="icon">💡</div>
+                <h4>Respuestas Inteligentes</h4>
+                <p style="font-size: 0.9rem; color: #666;">
+                    Pregunta sobre participantes, el programa o como se hizo el workshop.
+                </p>
+            </div>
+        </div>
+
+        <div class="conversation-box" style="margin-top: 2rem;">
+            <div class="message human">
+                <div class="message-label">USUARIO</div>
+                Quien es de Mexico?
+            </div>
+            <div class="message ai">
+                <div class="message-label">ORQUESTADOR → SERVIDOR → MODELO + CORPUS</div>
+                <strong>ModeloAgente:</strong> Hay 3 participantes de Mexico:
+                Victor Tortoriello (Consultor en Procesos y TI),
+                Fabian Noyola (Chief Impact Officer),
+                y Cecilia de la Paz (Subdirectora en Banco Base).<br>
+                <span style="font-size: 0.85rem; opacity: 0.7;">Respondido por ModeloAgente usando Haiku</span>
+            </div>
+        </div>
+
+        <section style="margin-top: 3rem;">
+            <h2>Arquitectura Final del Sistema</h2>
+        </section>
+
+        <div class="analogy-box" style="background: linear-gradient(135deg, #333 0%, #555 100%);">
+            <p style="font-family: monospace; font-size: 0.9rem; line-height: 1.8;">
+                <strong style="color: #64b5f6;">CLIENTE (Tu navegador)</strong><br>
+                HTML/CSS/JS en GitHub Pages<br>
+                OrquestadorAgent + MatematicasAgente<br>
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;|<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;v (si no es smalltalk ni matematicas)<br>
+                <br>
+                <strong style="color: #81c784;">SERVIDOR (Railway)</strong><br>
+                Node.js + Express<br>
+                ModeloAgente + CorpusAgente<br>
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;|<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;v<br>
+                <br>
+                <strong style="color: #ffb74d;">ANTHROPIC API</strong><br>
+                Modelo Haiku 4.5
+            </p>
+        </div>
+
         <div style="text-align: center; margin-top: 3rem;">
             <a href="index.html" style="display: inline-block; background: var(--mit-red); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600;">
                 Volver al Inicio
