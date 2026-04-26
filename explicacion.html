@@ -335,10 +335,10 @@
             </div>
 
             <div class="icon-card">
-                <div class="icon">🔮</div>
-                <h4>Preparado para Fase III</h4>
+                <div class="icon">🤝</div>
+                <h4>Preparado para Delegar</h4>
                 <p style="font-size: 0.9rem; color: #666;">
-                    En la siguiente fase, el agente tendra mas capacidades. Paciencia!
+                    El orquestador puede delegar tareas a otros agentes especializados.
                 </p>
             </div>
         </div>
@@ -349,10 +349,71 @@
                 Es como un recepcionista muy educado. Cuando llegas, te saluda; cuando te vas, se despide;
                 cuando agradeces, responde amablemente. Y si dices algo sin sentido... te lo hace saber con humor.
             </p>
-            <p style="margin-top: 1rem;">
-                En la <strong>Fase III</strong> aprendera a responder preguntas mas complejas.
-                Por ahora, solo maneja la "conversacion social" (smalltalk).
+        </div>
+
+        <!-- FASE III -->
+        <section style="margin-top: 4rem;">
+            <h2>Fase III: Sistema Multiagente</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; color: #666;">
+                Ahora tenemos <strong>dos agentes</strong> trabajando juntos. El OrquestadorAgent
+                detecta cuando necesitas hacer calculos y delega la tarea al MatematicasAgente.
             </p>
+        </section>
+
+        <div class="analogy-box">
+            <h3>Imaginalo asi...</h3>
+            <p>
+                Es como una empresa con un <strong>recepcionista</strong> (OrquestadorAgent) y un
+                <strong>contable</strong> (MatematicasAgente). Cuando llegas y pides hacer una suma,
+                el recepcionista te atiende amablemente y llama al contable para que haga el calculo.
+                Luego te devuelve el resultado.
+            </p>
+        </div>
+
+        <div class="icon-grid" style="margin-top: 2rem;">
+            <div class="icon-card">
+                <div class="icon">🎯</div>
+                <h4>OrquestadorAgent</h4>
+                <p style="font-size: 0.9rem; color: #666;">
+                    Recibe todos los mensajes y decide que hacer con ellos.
+                </p>
+            </div>
+
+            <div class="icon-card">
+                <div class="icon">🧮</div>
+                <h4>MatematicasAgente</h4>
+                <p style="font-size: 0.9rem; color: #666;">
+                    Especialista en /suma, /resta, /multiplicacion y /division.
+                </p>
+            </div>
+
+            <div class="icon-card">
+                <div class="icon">🔄</div>
+                <h4>Delegacion</h4>
+                <p style="font-size: 0.9rem; color: #666;">
+                    El orquestador detecta comandos y los envia al agente correcto.
+                </p>
+            </div>
+
+            <div class="icon-card">
+                <div class="icon">✨</div>
+                <h4>Respuesta Unificada</h4>
+                <p style="font-size: 0.9rem; color: #666;">
+                    El usuario siempre habla con el orquestador, sin saber quien calcula.
+                </p>
+            </div>
+        </div>
+
+        <div class="conversation-box" style="margin-top: 2rem;">
+            <div class="message human">
+                <div class="message-label">USUARIO</div>
+                /suma 15 27
+            </div>
+            <div class="message ai">
+                <div class="message-label">ORQUESTADOR → MATEMATICAS → ORQUESTADOR</div>
+                🧮 <strong>15 + 27 = 42</strong><br>
+                <span style="font-size: 0.85rem; opacity: 0.7;">Calculado por MatematicasAgente</span>
+            </div>
         </div>
 
         <div style="text-align: center; margin-top: 3rem;">
@@ -370,6 +431,7 @@
             Creado con IA, pensado para humanos - 2026
         </p>
     </footer>
+    <script src="js/matematicasAgente.js"></script>
     <script src="js/orquestadorAgent.js"></script>
 </body>
 </html>

@@ -1,12 +1,12 @@
 /**
- * OrquestadorAgent - Fase II
- * Agente que maneja smalltalk: saludos, despedidas, agradecimientos
- * y detecta mensajes sin sentido (basura)
+ * OrquestadorAgent - Fase III
+ * Agente orquestador que maneja smalltalk y delega operaciones matemáticas
+ * al MatematicasAgente
  */
 
 const OrquestadorAgent = {
     nombre: "OrquestadorAgent",
-    version: "Fase II",
+    version: "Fase III",
     idioma: "Español",
 
     // Patrones de reconocimiento
@@ -101,9 +101,9 @@ const OrquestadorAgent = {
             "No he podido entender ese mensaje. ¿Podrías intentarlo de nuevo?"
         ],
         noImplementado: [
-            "En esta Fase II solo estoy programado para responder a saludos, despedidas y agradecimientos. ¡Espera a la Fase III para más funcionalidades!",
-            "Esa pregunta aún no puedo responderla. En la Fase III tendré más capacidades. ¡Paciencia!",
-            "Interesante pregunta, pero en esta fase solo manejo smalltalk. ¡En la Fase III podré ayudarte con eso!"
+            "En esta fase manejo smalltalk y operaciones matemáticas (/suma, /resta, /multiplicacion, /division). ¡Espera a las siguientes fases para más funcionalidades!",
+            "Esa pregunta aún no puedo responderla. Prueba con los comandos matemáticos o espera a futuras fases. ¡Paciencia!",
+            "Interesante pregunta, pero aún no tengo esa capacidad. Prueba: /suma 5 3"
         ]
     },
 
@@ -120,6 +120,11 @@ En esta fase puedo:
 • Contestar a preguntas como "¿Cómo estás?" o "¿Qué tal?"
 • Aceptar agradecimientos y reconocimientos
 • Detectar mensajes sin sentido
+• <strong>Operaciones matemáticas</strong> (delegadas a MatematicasAgente):
+  <code>/suma 5 3</code>
+  <code>/resta 10 4</code>
+  <code>/multiplicacion 6 7</code>
+  <code>/division 20 4</code>
 
 Escribe algo para comenzar...`;
     },
@@ -164,8 +169,13 @@ Escribe algo para comenzar...`;
     procesarMensaje: function(mensaje) {
         const textoLimpio = mensaje.trim();
 
-        // Verificar si es basura
-        if (this.esBasura(textoLimpio)) {
+        // Verificar si es un comando matemático (delegar a MatematicasAgente)
+        if (typeof MatematicasAgente !== 'undefined' && MatematicasAgente.esComandoMatematico(textoLimpio)) {
+            return MatematicasAgente.ejecutar(textoLimpio);
+        }
+
+        // Verificar si es basura (pero no si empieza con /)
+        if (!textoLimpio.startsWith('/') && this.esBasura(textoLimpio)) {
             return this.getRespuestaAleatoria(this.respuestas.basura);
         }
 
@@ -213,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="chat-avatar">🤖</div>
                     <div>
                         <div class="chat-title">OrquestadorAgent</div>
-                        <div class="chat-subtitle">Fase II - Smalltalk</div>
+                        <div class="chat-subtitle">Fase III - Multiagente</div>
                     </div>
                 </div>
                 <button id="chat-close" class="chat-close">&times;</button>
