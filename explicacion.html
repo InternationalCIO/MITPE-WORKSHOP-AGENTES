@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como se Hizo | MIT Professional Education</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #A31F34, #C63F52);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 20px;
+            height: 20px;
+            background: #A31F34;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px #A31F34;
+        }
+        .timeline-content {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+        .timeline-content h3 {
+            color: #A31F34;
+            margin-bottom: 0.5rem;
+        }
+        .analogy-box {
+            background: linear-gradient(135deg, #A31F34 0%, #C63F52 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .analogy-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .icon-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .icon-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .icon-card h4 {
+            color: #A31F34;
+            margin-bottom: 0.5rem;
+        }
+        .conversation-box {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .message {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            max-width: 80%;
+        }
+        .message.human {
+            background: #e3e3e3;
+            margin-right: auto;
+        }
+        .message.ai {
+            background: #A31F34;
+            color: white;
+            margin-left: auto;
+        }
+        .message-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-title">
+                <strong>MIT Professional Education</strong> | Workshop IA Agentica
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="quienes-somos.html">Quienes Somos</a></li>
+                    <li><a href="explicacion.html">Explicacion</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <h2>Como se Creo Esta Web</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; color: #666;">
+                Una explicacion sencilla y visual de como la Inteligencia Artificial
+                ayudo a crear este sitio web. Sin tecnicismos, prometido.
+            </p>
+        </section>
+
+        <div class="analogy-box">
+            <h3>Imaginalo asi...</h3>
+            <p>
+                Crear esta web con IA es como tener una conversacion con un arquitecto muy talentoso.
+                Tu le dices lo que quieres ("quiero una casa con 3 habitaciones y un jardin"),
+                y el arquitecto no solo dibuja los planos, sino que tambien construye la casa al instante.
+            </p>
+            <p style="margin-top: 1rem;">
+                En nuestro caso, el "arquitecto" es <strong>Claude</strong>, una IA de Anthropic,
+                y la "casa" es esta pagina web.
+            </p>
+        </div>
+
+        <section>
+            <h2>El Proceso Paso a Paso</h2>
+        </section>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>1. La Conversacion Inicial</h3>
+                    <p>
+                        Todo empezo con una conversacion. Le explicamos a la IA que queriamos:
+                        una web con estilo MIT, que mostrara informacion de los participantes,
+                        que fuera sencilla y se viera bien en moviles.
+                    </p>
+                    <p style="margin-top: 0.5rem; font-style: italic; color: #888;">
+                        "Queremos una web estatica con estilo MIT, que presente a los participantes
+                        del programa de forma atractiva..."
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>2. Entendiendo el Contexto</h3>
+                    <p>
+                        La IA leyo los perfiles de todos los participantes (CVs, descripciones)
+                        para entender quienes sois y crear contenido relevante y personalizado.
+                    </p>
+                    <p style="margin-top: 0.5rem; color: #666;">
+                        Esto es como cuando un disenador estudia a su cliente antes de empezar.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>3. Creacion del Diseno</h3>
+                    <p>
+                        Con toda la informacion, la IA creo los estilos visuales (colores MIT,
+                        tipografias elegantes) y la estructura de las paginas.
+                    </p>
+                    <div class="tech-stack" style="margin-top: 1rem;">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">Responsive</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>4. Escritura del Codigo</h3>
+                    <p>
+                        La IA escribio todo el codigo necesario: la estructura de las paginas (HTML),
+                        los estilos visuales (CSS), y organizo todo de forma profesional.
+                    </p>
+                    <p style="margin-top: 0.5rem; color: #666;">
+                        Esto que normalmente tomaria horas o dias, la IA lo hace en minutos.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>5. Publicacion en Internet</h3>
+                    <p>
+                        Finalmente, la IA subio todo a GitHub (un servicio de almacenamiento de codigo)
+                        y activo GitHub Pages para que la web este disponible en internet.
+                    </p>
+                    <p style="margin-top: 0.5rem; font-weight: 600; color: #A31F34;">
+                        Y voila! La web esta en linea para que todos la vean.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <section>
+            <h2>Las Tecnologias Utilizadas</h2>
+        </section>
+
+        <div class="icon-grid">
+            <div class="icon-card">
+                <div class="icon">🤖</div>
+                <h4>Claude (IA)</h4>
+                <p style="font-size: 0.9rem; color: #666;">
+                    La inteligencia artificial de Anthropic que "penso" y escribio todo el codigo.
+                </p>
+            </div>
+
+            <div class="icon-card">
+                <div class="icon">📄</div>
+                <h4>HTML</h4>
+                <p style="font-size: 0.9rem; color: #666;">
+                    El "esqueleto" de la web. Define la estructura y el contenido.
+                </p>
+            </div>
+
+            <div class="icon-card">
+                <div class="icon">🎨</div>
+                <h4>CSS</h4>
+                <p style="font-size: 0.9rem; color: #666;">
+                    La "ropa" de la web. Define colores, fuentes y como se ve todo.
+                </p>
+            </div>
+
+            <div class="icon-card">
+                <div class="icon">🐙</div>
+                <h4>GitHub</h4>
+                <p style="font-size: 0.9rem; color: #666;">
+                    Donde vive el codigo y donde se publica la web para que todos la vean.
+                </p>
+            </div>
+        </div>
+
+        <section>
+            <h2>Un Ejemplo de la Conversacion</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem; color: #666;">
+                Asi es como se ve una conversacion tipica con la IA durante el desarrollo:
+            </p>
+        </section>
+
+        <div class="conversation-box">
+            <div class="message human">
+                <div class="message-label">HUMANO</div>
+                Quiero una web con estilo MIT que presente a los participantes del programa.
+            </div>
+            <div class="message ai">
+                <div class="message-label">CLAUDE (IA)</div>
+                Entendido. Voy a leer los perfiles de los participantes para conocer al grupo.
+                Que tipo de informacion quieres mostrar de cada persona?
+            </div>
+            <div class="message human">
+                <div class="message-label">HUMANO</div>
+                Algo resumido: nombre, rol profesional y pais. Tu decides el diseno.
+            </div>
+            <div class="message ai">
+                <div class="message-label">CLAUDE (IA)</div>
+                Perfecto. Voy a crear tarjetas elegantes con animaciones sutiles.
+                Comenzare con el CSS para el estilo MIT y luego las paginas HTML.
+            </div>
+        </div>
+
+        <div class="analogy-box" style="margin-top: 3rem;">
+            <h3>Lo Mas Importante</h3>
+            <p>
+                Esta web demuestra que la IA no reemplaza a las personas,
+                sino que las <strong>potencia</strong>. Un humano tuvo la idea y dio las instrucciones;
+                la IA ejecuto con precision y velocidad.
+            </p>
+            <p style="margin-top: 1rem;">
+                Es la combinacion perfecta: <strong>creatividad humana + capacidad de ejecucion de la IA</strong>.
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="index.html" style="display: inline-block; background: var(--mit-red); color: white; padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600;">
+                Volver al Inicio
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>
+            MIT Professional Education | IA Agentica para la Transformacion Empresarial
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">
+            Creado con IA, pensado para humanos - 2026
+        </p>
+    </footer>
+</body>
+</html>
