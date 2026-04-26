@@ -19,10 +19,22 @@ const OrquestadorAgent = {
             /^buenas\s*noches/i,
             /^hey$/i,
             /^saludos/i,
-            /^qu[eé]\s*tal/i,
-            /^c[oó]mo\s*est[aá]s/i,
-            /^c[oó]mo\s*va/i,
             /^buen\s*d[ií]a/i
+        ],
+        estadoBienestar: [
+            /^[¿?]*\s*c[oó]mo\s*est[aá]s\s*[¿?]*$/i,
+            /^[¿?]*\s*qu[eé]\s*tal\s*[¿?]*$/i,
+            /^[¿?]*\s*qu[eé]\s*tal\s*est[aá]s\s*[¿?]*$/i,
+            /^[¿?]*\s*qu[eé]\s*tal\s*tu\s*d[ií]a\s*[¿?]*$/i,
+            /^[¿?]*\s*qu[eé]\s*tal\s*todo\s*[¿?]*$/i,
+            /^[¿?]*\s*c[oó]mo\s*va\s*[¿?]*$/i,
+            /^[¿?]*\s*c[oó]mo\s*te\s*va\s*[¿?]*$/i,
+            /^[¿?]*\s*c[oó]mo\s*andas\s*[¿?]*$/i,
+            /^[¿?]*\s*c[oó]mo\s*vas\s*[¿?]*$/i,
+            /^[¿?]*\s*todo\s*bien\s*[¿?]*$/i,
+            /^[¿?]*\s*qu[eé]\s*hay\s*[¿?]*$/i,
+            /^[¿?]*\s*qu[eé]\s*onda\s*[¿?]*$/i,
+            /^[¿?]*\s*c[oó]mo\s*lo\s*llevas\s*[¿?]*$/i
         ],
         despedidas: [
             /^adi[oó]s/i,
@@ -64,6 +76,13 @@ const OrquestadorAgent = {
             "¡Hola! Bienvenido al programa de IA Agéntica del MIT.",
             "¡Saludos! ¿Cómo puedo asistirte?"
         ],
+        estadoBienestar: [
+            "¡Muy bien, gracias por preguntar! Aquí, listo para ayudarte. ¿Y tú qué tal?",
+            "¡Excelente! Funcionando al 100%. ¿En qué puedo ayudarte?",
+            "¡Todo genial! Como buen agente de IA, siempre de buen humor. ¿Cómo estás tú?",
+            "¡Perfectamente! Preparado para asistirte en lo que necesites.",
+            "¡De maravilla! Gracias por interesarte. ¿Cómo va tu día?"
+        ],
         despedidas: [
             "¡Hasta pronto! Fue un placer ayudarte.",
             "¡Adiós! Que tengas un excelente día.",
@@ -98,6 +117,7 @@ const OrquestadorAgent = {
 <strong>¿Qué puedo hacer?</strong>
 En esta fase puedo:
 • Responder a saludos y despedidas
+• Contestar a preguntas como "¿Cómo estás?" o "¿Qué tal?"
 • Aceptar agradecimientos y reconocimientos
 • Detectar mensajes sin sentido
 
@@ -147,6 +167,11 @@ Escribe algo para comenzar...`;
         // Verificar si es basura
         if (this.esBasura(textoLimpio)) {
             return this.getRespuestaAleatoria(this.respuestas.basura);
+        }
+
+        // Verificar preguntas sobre estado/bienestar
+        if (this.coincideConPatron(textoLimpio, this.patrones.estadoBienestar)) {
+            return this.getRespuestaAleatoria(this.respuestas.estadoBienestar);
         }
 
         // Verificar saludos
